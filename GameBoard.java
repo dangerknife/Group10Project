@@ -30,13 +30,13 @@ public class GameBoard {
 	private static JPanel combinedPanel = new JPanel();
 
 	// buttons will be displayed as arrows to indicate which column to drop a game piece
-	private static JButton c0 = new JButton();
-	private static JButton c1 = new JButton();
-	private static JButton c2 = new JButton();
-	private static JButton c3 = new JButton();
-	private static JButton c4 = new JButton();
-	private static JButton c5 = new JButton();
-
+    //buttons declared in constructor
+	private static JButton c0;
+	private static JButton c1;
+	private static JButton c2;
+	private static JButton c3;
+	private static JButton c4;
+	private static JButton c5;
 	// Counter for indicating who's turn it is (odd is Player 1, even is Player 2)
 	private static int playerCounter = 1;
 	
@@ -77,6 +77,14 @@ public class GameBoard {
 		
 		// always add the basic 6x6, then decide if more need to be added
 		// create header with arrow selection for piece drop
+
+        c0 = new JButton();
+        c1 = new JButton();
+        c2 = new JButton();
+        c3 = new JButton();
+        c4 = new JButton();
+        c5 = new JButton();
+
 		try {
 			ImageIcon arrow = new ImageIcon("resources/downarrow.png");
 			c0.setIcon(arrow);
@@ -109,6 +117,8 @@ public class GameBoard {
 		c3.addActionListener(new ButtonListener());
 		c4.addActionListener(new ButtonListener());
 		c5.addActionListener(new ButtonListener());
+		//reenables column buttons after a reset
+		enableColumnButtons();
 		
 		buildEmptyBoard();
 		
@@ -135,7 +145,26 @@ public class GameBoard {
 					break;
 		}
 	}
+
 	
+	private static void disableColumnButtons(){
+        c0.setEnabled(false);
+        c1.setEnabled(false);
+        c2.setEnabled(false);
+        c3.setEnabled(false);
+        c4.setEnabled(false);
+        c5.setEnabled(false);
+    }
+
+    public static void enableColumnButtons(){
+        c0.setEnabled(true);
+        c1.setEnabled(true);
+        c2.setEnabled(true);
+        c3.setEnabled(true);
+        c4.setEnabled(true);
+        c5.setEnabled(true);
+    }
+
 	public JPanel getPanel() {
 		return combinedPanel;
 	}
@@ -172,6 +201,7 @@ public class GameBoard {
       		placePiece(e);
 	    }
      }
+
     
     // MAY NOT BE NEEDED
     public static String boardArray() {
@@ -373,12 +403,7 @@ public class GameBoard {
   		}
 			if (isWinningPlay() == true) {
 				// Disable additional plays if someone has won
-				c0.setEnabled(false);
-				c1.setEnabled(false);
-				c2.setEnabled(false);
-				c3.setEnabled(false);
-				c4.setEnabled(false);
-				c5.setEnabled(false);
+				disableColumnButtons();
 			} else if (isBoardFull()) {
 				JOptionPane.showMessageDialog(null, "No Moves Left. This game is a draw!");
 			}
@@ -535,8 +560,6 @@ public class GameBoard {
 		}
     	return dWinner;
     }
-
-    
 }
 
 

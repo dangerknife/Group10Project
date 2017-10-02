@@ -372,7 +372,7 @@ public class CFour extends JFrame {
      // Work in Progress
      static void resetGame() {
   		colorSelectLabel.setBackground(Color.WHITE);
-  		
+
   		player1Label.setOpaque(true);
   		player1Label.setBackground(Color.black);
   		
@@ -381,14 +381,17 @@ public class CFour extends JFrame {
   		
   		p1RadioGroup.clearSelection();
   		p2RadioGroup.clearSelection();
-  		
+
+  		//reset the colors back to null on a reset
+  		p1Color = null;
   		player1Panel.add(player1Label);
   		player1Panel.add(p1RedRadio);
   		player1Panel.add(p1GreenRadio);
   		player1Panel.add(p1BlueRadio);
   		player1Panel.add(p1OrangeRadio);
   		player1Panel.setBackground(Color.WHITE);
-  		
+
+  		p2Color = null;
   		player2Panel.add(player2Label);
   		player2Panel.add(p2RedRadio);
   		player2Panel.add(p2GreenRadio);
